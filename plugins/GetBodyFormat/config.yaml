@@ -1,0 +1,19 @@
+name: BodyFormat
+key: BodyFormat
+id: BodyFormat
+version: 1.0.0
+
+tags:
+  function:
+    EntryBodyFormat: >
+      sub {
+        my ($ctx, $args) = @_;
+        my $entry = $ctx->stash('entry')
+          or return $ctx->error("Tag called without an entry in context");
+        my $format = $entry->convert_breaks || 'なし';
+        if ($format eq '__default__') {
+          return '改行を変換';
+        } else {
+          return $format;
+        }
+      }
